@@ -1,0 +1,11 @@
+{
+  "name": "pi-skills",
+  "version": "1.0.0",
+  "description": "Deterministic /skill:name commands converted from jbalatero/claude-plugins for Pi",
+  "keywords": ["pi-package"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jbalatero/pi-skills"
+  }
+}
