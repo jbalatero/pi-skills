@@ -124,17 +124,10 @@ Output is `<ahead>\t<behind>` (ahead = local commits not on origin; behind = ori
 | State | ahead | behind | Action |
 |-------|-------|--------|--------|
 | Up to date | 0 | 0 | Nothing to do. |
-| Behind only | 0 | >0 | `git merge --ff-only origin/<branch>` |
-| Ahead only | >0 | 0 | Leave as-is. Report: local is N commits ahead of origin (unpushed work). |
-| Diverged | >0 | >0 | **STOP and ask.** |
+| Behind origin | any | >0 | `git reset --hard origin/<branch>` |
+| Ahead only | >0 | 0 | Leave as-is. Report: local is N commits ahead (unpushed). |
 
-**Diverged** — the local branch has commits origin doesn't, and origin has commits the local branch doesn't. Never auto-resolve. Report both counts and present options:
-
-- Rebase local commits onto origin: `git rebase origin/<branch>`
-- Reset local to match origin (discards the N local commits): `git reset --hard origin/<branch>`
-- Leave it as-is and handle manually
-
-Let the user choose. Do not discard commits without explicit approval.
+**Behind origin** — origin has commits the local branch doesn't. Reset to origin automatically. If the branch is also ahead (diverged), this discards local commits. The skill's purpose is syncing to origin — that's what it does. Report the reset clearly.
 
 ---
 
@@ -152,7 +145,7 @@ Report a short summary:
 
 - Branch checked out: `<branch>`
 - Tracking: `origin/<branch>`
-- Position: in sync with origin / N ahead / (diverged — awaiting your decision)
+- Position: in sync with origin / N ahead (unpushed work)
 
 If tracking is not `origin/<branch>` or HEAD does not match origin (and the branch isn't intentionally ahead), say so plainly rather than claiming success.
 
@@ -167,6 +160,6 @@ checkout-track <branch>
   3. Verify origin/<b>    →  missing? stop
   4. Worktree check       →  held elsewhere? stop and report path
   5. Checkout/create      →  new: switch --track  │  exists: switch + set-upstream
-  6. Sync existing        →  ff-only behind  │  leave ahead  │  diverged: ask
+  6. Sync existing        →  behind: reset --hard  │  ahead only: leave
   7. Verify + report      →  tracking + position
 ```
