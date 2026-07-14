@@ -10,7 +10,13 @@ disable-model-invocation: true
 
 ## Configuration
 
-Read the `## Git Workflow Config` section from the project documentation (e.g., README.md, CLAUDE.md, or CONVENTIONS.md) for configuration. If not present, use defaults: target branch = `staging`, plan docs path = none.
+Read the `## Git Workflow Config` section from the project documentation (e.g., README.md, CLAUDE.md, or CONVENTIONS.md) for configuration. Determine the target branch using this priority:
+
+1. `targetBranch` from `## Git Workflow Config` (if present)
+2. GitHub repo default branch: `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`
+3. Fall back to `staging`
+
+If `planDocsPath` is not configured, default to none.
 
 ## 1. Validate State
 

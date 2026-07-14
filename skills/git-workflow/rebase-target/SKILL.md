@@ -12,7 +12,11 @@ Rebases the current feature branch onto the target branch, resolves straightforw
 
 ## Configuration
 
-Read the `## Git Workflow Config` section from the project documentation for configuration. If not present, use defaults: target branch = `staging`.
+Read the `## Git Workflow Config` section from the project documentation for configuration. Determine the target branch using this priority:
+
+1. `targetBranch` from `## Git Workflow Config` (if present)
+2. GitHub repo default branch: `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`
+3. Fall back to `staging`
 
 **Precondition:** Working directory is clean and all changes are committed.
 

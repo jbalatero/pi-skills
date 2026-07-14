@@ -15,7 +15,8 @@ Automates the full target branch → main deployment pipeline. Run this from the
 Determine the target branch using this priority:
 1. Branch specified by the user in their prompt
 2. `targetBranch` from the `## Git Workflow Config` section in project documentation
-3. Falls back to `staging` if neither is provided
+3. GitHub repo default branch: `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`
+4. Falls back to `staging` if none of the above are available
 
 Read the `## Git Workflow Config` section from the project documentation for additional configuration. Optional config:
 - `targetBranch` — default target branch for deployments

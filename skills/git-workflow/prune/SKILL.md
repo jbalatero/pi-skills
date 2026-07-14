@@ -25,9 +25,13 @@ Run `git remote -v` and look for:
 
 ### 1.2 Find the target branch
 
-Run `git remote show <upstream>` or check for common default branches:
-- `main`, `master`, `dev` (in that order of preference)
-- Or read from `git symbolic-ref refs/remotes/<upstream>/HEAD`
+Determine the target branch using this priority:
+
+1. `targetBranch` from `## Git Workflow Config` in project documentation (if present)
+2. GitHub repo default branch: `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`
+3. Check for common default branches: `main`, `master`, `dev` (in that order)
+4. Read from `git symbolic-ref refs/remotes/<upstream>/HEAD`
+5. Fall back to `staging`
 
 ### 1.3 Confirm with user
 

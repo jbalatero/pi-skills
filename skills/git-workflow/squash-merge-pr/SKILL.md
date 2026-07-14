@@ -10,7 +10,14 @@ Squash merge an existing PR into the target branch and optionally annotate the p
 
 ## Configuration
 
-Read the `## Git Workflow Config` section from the project documentation for configuration. If not present, use defaults: target branch = `staging`, plan docs path = none.
+Read the `## Git Workflow Config` section from the project documentation for configuration. Determine the target branch using this priority:
+
+1. The PR's `baseRefName` (fetched in step 1 below) — always authoritative for squash-merge
+2. `targetBranch` from `## Git Workflow Config` (if present, used as fallback validation only)
+3. GitHub repo default branch: `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`
+4. Fall back to `staging`
+
+If `planDocsPath` is not configured, default to none.
 
 ## Inputs
 
@@ -25,7 +32,7 @@ gh pr view <NUMBER> --json state,baseRefName,mergeable,headRefName
 ```
 
 - Confirm `state` is `OPEN`
-- Confirm `baseRefName` matches the configured target branch
+- Set target branch to `baseRefName` from the PR (this is the authoritative target)
 - Confirm `mergeable` is `MERGEABLE`
 - If any check fails, stop and report
 

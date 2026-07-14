@@ -10,9 +10,11 @@ disable-model-invocation: true
 
 ## Configuration
 
-Read the `## Git Workflow Config` section from the project documentation for configuration. If not present, use defaults:
+Read the `## Git Workflow Config` section from the project documentation for configuration. Determine the target branch using this priority:
 
-- **target branch**: `staging`
+1. `targetBranch` from `## Git Workflow Config` (if present)
+2. GitHub repo default branch: `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`
+3. Fall back to `staging`
 
 ## Context
 
@@ -67,7 +69,7 @@ When an issue is referenced:
 
 ## Workflow
 
-1. **Read config**: Check project documentation for a `## Git Workflow Config` section and extract the target branch. Default to `staging` if not found.
+1. **Read config**: Determine target branch per the Configuration section above (config → GitHub default → `staging`).
 1. **Branch validation**: If currently on the target branch, stop and ask the user to switch to a feature branch first.
 1. Stage changes if not already staged: `git add .`
 1. Commit if there are no commits yet on the branch. Follow the same format for the commit message as for the pull request title (conventional or subject-oriented based on repo standard): `git commit -m "..."`
