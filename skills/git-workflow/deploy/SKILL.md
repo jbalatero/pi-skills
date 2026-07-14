@@ -84,25 +84,26 @@ Read the `## Git Workflow Config` section from the project documentation for add
 - If only changelog: `docs: add changelog for YYYY-MM-DD.NNN release`
 - Skip if there is nothing to commit
 
-### 6. Rebase to Main
+### 6. Fast-Forward Main
 
-- `git checkout main`
-- `git pull origin main`
-- `git rebase <target>` (fast-forwards main to target tip, keeping linear history)
-- If rebase fails due to conflicts, abort the rebase, return to target branch, and report the issue
+- `git fetch origin main` — get latest main from origin
+- Verify fast-forward: confirm `origin/main` is an ancestor of `<target>` (`git merge-base --is-ancestor origin/main <target>`)
+- If not fast-forwardable, stop and report the issue — do not force-push
+- This avoids worktree conflicts since it never checks out main
 
-### 7. Push Main
+### 7. Push to Main and Target
 
-- `git push origin main`
+- `git push origin <target>:main` — push target branch to main
+- If this fails (e.g., branch protection), stop and report the error
 
-### 8. Return to Target Branch
+### 8. Push Target to Origin
 
-- `git checkout <target>`
+- `git push origin <target>` — push the changelog commit (if any) to origin's target branch
 - Report success with a summary of what was deployed (PR numbers, changelog file path if applicable)
 
 ## Error Handling
 
 - Stop at the first failure and report clearly what went wrong
 - Never force-push
-- If step 6 fails, abort the rebase (`git rebase --abort`), checkout target branch, and report
+- If step 6 fails (main is not an ancestor of target), report that a fast-forward is not possible and stop
 - Always leave the repo in a clean state on the branch the user started from
