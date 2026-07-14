@@ -12,7 +12,7 @@ disable-model-invocation: true
 
 Read the `## Git Workflow Config` section from the project documentation (e.g., README.md, CLAUDE.md, or CONVENTIONS.md) for configuration. Determine the target branch using this priority:
 
-1. If the current branch has an open PR, use its `baseRefName`: `gh pr view --json baseRefName --jq '.baseRefName'`
+1. Branch specified by the user in their prompt
 2. `targetBranch` from `## Git Workflow Config` (if present)
 3. Fall back to `staging`
 
