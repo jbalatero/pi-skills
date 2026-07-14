@@ -45,6 +45,7 @@ Read the `## Git Workflow Config` section from the project documentation (e.g., 
 
 ## 5. Clean Up
 
+- Delete any leftover temp PR body files: `rm -f tmp/pr-body-*.md`
 - Do NOT checkout the target branch locally — another worktree may have it checked out, which causes `fatal: '<target>' is already used by worktree`
 - The squash merge already updated the target branch on the remote, so no local checkout is needed
 - Report summary: PR number, merge status, plan file updated (if applicable)

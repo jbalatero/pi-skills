@@ -77,3 +77,4 @@ When an issue is referenced:
    - Include the branch name in the filename to avoid conflicts with concurrent agents
    - **GitHub**: `gh pr create --base <target-branch> --title "..." --body-file tmp/pr-body-<branch>.md`
    - **GitLab**: `glab mr create --title "..." --description "$(cat tmp/pr-body-<branch>.md)"`
+1. Clean up the temp file: `rm tmp/pr-body-<branch>.md`
