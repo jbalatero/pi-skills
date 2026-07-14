@@ -1,7 +1,7 @@
 ---
 name: deploy
 description: >
-  Full target-to-production deployment: changelog generation, env var diff check, pre-deploy script, rebase to main.
+  Full target-to-production deployment: changelog generation, env var diff check, pre-deploy script, fast-forward to main.
   Use when the user wants to deploy, ship to production, release, or push to main from a target/staging branch.
 disable-model-invocation: true
 ---
@@ -14,9 +14,8 @@ Automates the full target branch → main deployment pipeline. Run this from the
 
 Determine the target branch using this priority:
 1. Branch specified by the user in their prompt
-2. If the current branch has an open PR, use its `baseRefName`: `gh pr view --json baseRefName --jq '.baseRefName'`
-3. `targetBranch` from the `## Git Workflow Config` section in project documentation
-4. Falls back to `staging` if none of the above are available
+2. `targetBranch` from the `## Git Workflow Config` section in project documentation
+3. Falls back to `staging` if none of the above are available
 
 Read the `## Git Workflow Config` section from the project documentation for additional configuration. Optional config:
 - `targetBranch` — default target branch for deployments
@@ -92,7 +91,7 @@ Read the `## Git Workflow Config` section from the project documentation for add
 - If not fast-forwardable, stop and report the issue — do not force-push
 - This avoids worktree conflicts since it never checks out main
 
-### 7. Push to Main and Target
+### 7. Push to Main
 
 - `git push origin <target>:main` — push target branch to main
 - If this fails (e.g., branch protection), stop and report the error

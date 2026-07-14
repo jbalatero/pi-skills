@@ -42,13 +42,13 @@ gh pr merge <NUMBER> --squash
 
 If merge fails, check `gh pr checks <NUMBER>` and report.
 
-### 3. Switch to Target Branch
+### 3. Sync Target Branch
 
 ```bash
-git checkout <target> && git pull origin <target>
+git fetch origin <target>
 ```
 
-If `git checkout <target>` fails due to worktree conflict (`fatal: '<target>' is already used by worktree`), run `git fetch origin <target>` instead — the remote merge already succeeded.
+Do NOT attempt `git checkout <target>` — another worktree may have it checked out. The remote merge already succeeded, so a fetch is sufficient to update the local tracking ref. If you need the local branch updated, use the worktree that holds it.
 
 ### 4. Update Plan File with PR Number (if planDocsPath configured)
 

@@ -71,7 +71,7 @@ When an issue is referenced:
 
 1. **Read config**: Determine target branch per the Configuration section above (user → config → `staging`).
 1. **Branch validation**: If currently on the target branch, stop and ask the user to switch to a feature branch first.
-1. Stage changes if not already staged: `git add .`
+1. Stage changes by path if not already staged: `git add <specific-files>` (never `git add .`)
 1. Commit if there are no commits yet on the branch. Follow the same format for the commit message as for the pull request title (conventional or subject-oriented based on repo standard): `git commit -m "..."`
 1. Push the branch to remote: `git push -u origin HEAD`
 1. Create the PR/MR:
