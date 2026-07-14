@@ -10,12 +10,10 @@ Squash merge an existing PR into the target branch and optionally annotate the p
 
 ## Configuration
 
-Read the `## Git Workflow Config` section from the project documentation for configuration. Determine the target branch using this priority:
+Read the `## Git Workflow Config` section from the project documentation for configuration. The target branch is always the PR's `baseRefName` (fetched in step 1). For fallback when no PR number is provided yet:
 
-1. The PR's `baseRefName` (fetched in step 1 below) — always authoritative for squash-merge
-2. `targetBranch` from `## Git Workflow Config` (if present, used as fallback validation only)
-3. GitHub repo default branch: `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`
-4. Fall back to `staging`
+1. `targetBranch` from `## Git Workflow Config` (if present)
+2. Fall back to `staging`
 
 If `planDocsPath` is not configured, default to none.
 

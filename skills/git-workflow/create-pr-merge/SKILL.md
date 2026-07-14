@@ -12,8 +12,8 @@ disable-model-invocation: true
 
 Read the `## Git Workflow Config` section from the project documentation (e.g., README.md, CLAUDE.md, or CONVENTIONS.md) for configuration. Determine the target branch using this priority:
 
-1. `targetBranch` from `## Git Workflow Config` (if present)
-2. GitHub repo default branch: `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`
+1. If the current branch has an open PR, use its `baseRefName`: `gh pr view --json baseRefName --jq '.baseRefName'`
+2. `targetBranch` from `## Git Workflow Config` (if present)
 3. Fall back to `staging`
 
 If `planDocsPath` is not configured, default to none.
