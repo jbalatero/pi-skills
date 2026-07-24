@@ -30,7 +30,7 @@ Read the `## Git Workflow Config` section from the project documentation for con
 ### 2. Fetch and Rebase
 
 - `git fetch origin <target>`
-- `git rebase origin/<target>`
+- `GIT_EDITOR=true git rebase origin/<target>`
 - If rebase succeeds with no conflicts, skip to step 4
 
 ### 3. Resolve Conflicts
@@ -72,8 +72,8 @@ If you are not sure how a conflict should be resolved, stop and ask me for direc
 
 4. For simple conflicts: edit the file to resolve, remove conflict markers, `git add <file>`
 5. For complex conflicts: show the user the conflicted hunks with surrounding context (10 lines before and after), explain what each side changed, and ask which resolution they prefer. After the user decides, apply their choice and `git add <file>`
-6. After all files in the current step are resolved, run `git rebase --continue`
-   - If git reports "No changes — did you forget to use 'git add'?" (the commit became empty), run `git rebase --skip` instead
+6. After all files in the current step are resolved, run `GIT_EDITOR=true git rebase --continue`
+   - If git reports "No changes — did you forget to use 'git add'?" (the commit became empty), run `GIT_EDITOR=true git rebase --skip` instead
 7. Repeat until rebase completes or user aborts
 
 If the user chooses to abort at any point: `git rebase --abort` and stop.
