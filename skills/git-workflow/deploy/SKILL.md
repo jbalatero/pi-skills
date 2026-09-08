@@ -47,7 +47,7 @@ Read the `## Git Workflow Config` section from the project documentation for add
 - Write the changelog file:
   - `# Release YYYY-MM-DD.NNN`
   - `> summary line` (under 200 chars, no double quotes) summarizing all PRs — plain language understandable by non-technical people
-  - Reference lines as additional `>` blockquotes after the summary, one per PR (if PR numbers available)
+  - Reference lines as additional `>` blockquotes after the summary, one per PR (if PR numbers available) — include only business-relevant changes that matter to stakeholders (features, fixes, security patches); leave out housekeeping PRs such as `chore`, `perf`, `test`, `ci`, `build`, `docs`, and `refactor`
   - One `## feat/fix(scope): Description (#NNN)` section per PR with overview, key changes, and notable decisions
   - Always add a `## Rollback` section at the end — if `rollbackInstructions` is configured in `## Git Workflow Config`, use that as the section content; otherwise write generic rollback steps based on the changes
 - **Always generate a changelog** if there are code changes in the diff. Only skip if the diff contains exclusively non-functional changes.
